@@ -47,9 +47,9 @@ const UserList = () => {
               <td data-label="Email">{user.email}</td>
               <td data-label="Phone">{user.phone}</td>
               <td data-label="Actions">
-                <button className="btn btn-secondary" onClick={() => handleShowEdit(user)}>Edit</button>
-                <button className="btn btn-info" onClick={() => handleShowInfo(user)}>Info</button>
-                <button className="btn btn-danger" onClick={() => handleDelete(user.id)} disabled={deleteLoading}>
+                <button className="btn btn-secondary" style={{marginRight:"2px"}} onClick={() => handleShowEdit(user)}>Edit</button>
+                <button className="btn btn-info" style={{marginRight:"2px"}}  onClick={() => handleShowInfo(user)}>Info</button>
+                <button className="btn btn-danger" style={{marginRight:"2px"}}  onClick={() => handleDelete(user.id)} disabled={deleteLoading}>
                   {deleteLoading ? "Deleting..." : "Delete"}
                 </button>
               </td>
