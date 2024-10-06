@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import DashboardContext from '../createcontext/DashboardContext';
-import { useParams } from 'react-router-dom';
 
 const EditUserModal = ({ show, handleClose, userId }) => {
   const [user, setUser] = useState({ 

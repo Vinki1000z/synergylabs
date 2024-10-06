@@ -3,18 +3,19 @@ import DashboardContext from '../createcontext/DashboardContext';
 import { Link } from 'react-router-dom';
 import UserInfoModal from './UserInfoModal';  
 import CreateUserModal from './CreateUserModal';  
-import EditUserModal from './EditUserModal';  // Import the EditUserModal component
+import EditUserModal from './EditUserModal';  
+import './UserList.css'; // Import the CSS file
 
 const UserList = () => {
   const { users, handleDelete, addUser, deleteLoading } = useContext(DashboardContext);
   const [showInfo, setShowInfo] = useState(false);
   const [showCreate, setShowCreate] = useState(false);
-  const [showEdit, setShowEdit] = useState(false);  // State for Edit User Modal
+  const [showEdit, setShowEdit] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
   const handleCloseInfo = () => setShowInfo(false);
   const handleCloseCreate = () => setShowCreate(false);
-  const handleCloseEdit = () => setShowEdit(false);  // Function to close Edit Modal
+  const handleCloseEdit = () => setShowEdit(false);
   const handleShowInfo = (user) => {
     setSelectedUser(user);
     setShowInfo(true);
@@ -24,12 +25,12 @@ const UserList = () => {
   };
   const handleShowEdit = (user) => {
     setSelectedUser(user);
-    setShowEdit(true);  // Open Edit Modal
+    setShowEdit(true);
   };
 
   return (
-    <div>
-      <button onClick={handleShowCreate}>Add New User</button>
+    <div className="table-container">
+      <button className="btn btn-primary" style={{marginBottom:"2px"}} onClick={handleShowCreate}>Add New User</button>
       <table>
         <thead>
           <tr>
@@ -42,13 +43,13 @@ const UserList = () => {
         <tbody>
           {users.map((user) => (
             <tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.phone}</td>
-              <td>
-                <button onClick={() => handleShowEdit(user)}>Edit</button> {/* Show Edit Modal */}
-                <button onClick={() => handleShowInfo(user)}>Info</button>
-                <button onClick={() => handleDelete(user.id)} disabled={deleteLoading}>
+              <td data-label="Name">{user.name}</td>
+              <td data-label="Email">{user.email}</td>
+              <td data-label="Phone">{user.phone}</td>
+              <td data-label="Actions">
+                <button className="btn btn-secondary" onClick={() => handleShowEdit(user)}>Edit</button>
+                <button className="btn btn-info" onClick={() => handleShowInfo(user)}>Info</button>
+                <button className="btn btn-danger" onClick={() => handleDelete(user.id)} disabled={deleteLoading}>
                   {deleteLoading ? "Deleting..." : "Delete"}
                 </button>
               </td>
@@ -64,7 +65,7 @@ const UserList = () => {
       <CreateUserModal show={showCreate} handleClose={handleCloseCreate} addUser={addUser} />
 
       {/* Modal for editing a user */}
-      <EditUserModal show={showEdit} handleClose={handleCloseEdit} userId={selectedUser ? selectedUser.id : null} /> {/* Pass userId */}
+      <EditUserModal show={showEdit} handleClose={handleCloseEdit} userId={selectedUser ? selectedUser.id : null} />
     </div>
   );
 };
